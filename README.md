@@ -71,9 +71,13 @@ We are going to use Google Cloud Marketplace for deploying the NVIDIA Isaac Sim 
 
 - Have VPC network ready
 
-
 Deploy NVIDIA Isaac Sim Development Workstation via Google Cloud Marketplace:   
 [Go to Google Cloud Marketplace and search for Isaac Sim Workstation](https://pantheon.corp.google.com/marketplace/product/nvidia/nvidia-isaac-sim-development-workstation-linux)]
+
+Go to GCP Marketplace: 
+![marketplace](/images/image8.png)
+![marketplace](/images/image7.png)
+![marketplace](/images/image6.png)
 
 It takes about 5 mins for the machine to be deployed:  
 \*\* WARNING \*\*: The Cluster Toolkit startup scripts are currently running.
@@ -81,7 +85,6 @@ It takes about 5 mins for the machine to be deployed:
 Then do the following steps: 
 
 1. ssh to the VM  
-(image1)
 
 2. git clone this repo to the home directory.
 
@@ -107,7 +110,14 @@ Listening on port \[2222\].
 
 2. Setup the Thinlinc client and connect:
 
-![config page](/images/image2.png)
+Start the Thinlinc client on desktop:
 ![login](/images/image1.png)
+
+Config the ports for IAP and localhost:
+![config page](/images/image2.png)
+
+Click "Connect" and we see the warning page:
 ![warning](images/image3.png)
+
+Login: 
 ![desktop](/images/image5.png)
