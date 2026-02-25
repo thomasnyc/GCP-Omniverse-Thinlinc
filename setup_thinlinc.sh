@@ -3,7 +3,7 @@
 # This file is to setup the Thinlinc master to react to localhost request via GCP IAP tunnel setup.
 
 # Install Thinlinc Server
-wget -O https://www.cendio.com/downloads/server/tl-4.20.0-server.zip
+wget https://www.cendio.com/downloads/server/tl-4.20.0-server.zip
 unzip -o tl-4.20.0-server.zip
 sudo apt install ./tl-4.20.0-server/packages/thinlinc-server_4.20.0-4392_amd64.deb -y
 echo "Generating ThinLinc setup answers file..."
