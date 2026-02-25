@@ -91,14 +91,13 @@ It takes about 5 mins for the machine to be deployed:
 Then do the following steps: 
 
 1. ssh to the VM  
-
 2. git clone this repo to the home directory.
+3. chmod 755 to the setup_thinlinc.sh
+4. Execute the setup_thinlinc.sh
 
-3. chmod 755 to the install_vm.sh
+This completes the installation of 
 
-4. Execute the install_vm.sh 
-
-## Connect to the Remote Visualization VM
+## Connect to the NVIDIA Isaac Sim workstation VM
 
 1. Setup the IAP tunnel from the On-prem machine: 
 Assume the VM name is : rocky8-thinlinc-g4-gpu-vm-0
@@ -106,8 +105,7 @@ Assume the VM name is : rocky8-thinlinc-g4-gpu-vm-0
 gcloud compute start-iap-tunnel <machine name> 22 --local-host-port=localhost:2222 
 ```
 
-thomashk$ gcloud compute start-iap-tunnel nvidia-2-vm 22 \--local-host-port=localhost:2222  
-No zone specified. Using zone \[us-central1-b\] for instance: \[nvidia-2-vm\].  
+$ gcloud compute start-iap-tunnel nvidia-2-vm 22 \--local-host-port=localhost:2222   
 **WARNING:**   
 To increase the performance of the tunnel, consider installing NumPy. For instructions,  
 please see https://cloud.google.com/iap/docs/using-tcp-forwarding\#increasing\_the\_tcp\_upload\_bandwidth  
