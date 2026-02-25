@@ -74,9 +74,15 @@ We are going to use Google Cloud Marketplace for deploying the NVIDIA Isaac Sim 
 Deploy NVIDIA Isaac Sim Development Workstation via Google Cloud Marketplace:   
 [Go to Google Cloud Marketplace and search for Isaac Sim Workstation](https://pantheon.corp.google.com/marketplace/product/nvidia/nvidia-isaac-sim-development-workstation-linux)]
 
+## Setup GCP Marketplace NVIDIA Isaac Sim Workstation: 
+
 Go to GCP Marketplace: 
 ![marketplace](/images/image8.png)
+
+Setup the network:
 ![marketplace](/images/image7.png)
+
+Click the deployment: 
 ![marketplace](/images/image6.png)
 
 It takes about 5 mins for the machine to be deployed:  
