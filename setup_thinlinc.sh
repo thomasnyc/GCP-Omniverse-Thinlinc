@@ -4,7 +4,7 @@
 
 # install VirtualGL
 wget https://github.com/VirtualGL/virtualgl/releases/download/3.1.4/virtualgl_3.1.4_amd64.deb
-sudo apt install virtualgl_3.1.4_amd64.deb -y 
+sudo dpkg -i virtualgl_3.1.4_amd64.deb 
 
 # Install Thinlinc Server
 wget https://www.cendio.com/downloads/server/tl-4.20.0-server.zip
