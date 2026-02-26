@@ -2,6 +2,10 @@
 
 # This file is to setup the Thinlinc master to react to localhost request via GCP IAP tunnel setup.
 
+# install VirtualGL
+wget https://github.com/VirtualGL/virtualgl/releases/download/3.1.4/virtualgl_3.1.4_amd64.deb
+sudo apt install virtualgl_3.1.4_amd64.deb -y 
+
 # Install Thinlinc Server
 wget https://www.cendio.com/downloads/server/tl-4.20.0-server.zip
 unzip -o tl-4.20.0-server.zip
