@@ -14,16 +14,29 @@ Networking and login: IAP tunnel and SSH key with OSlogin.
 
 Various techniques exist for connecting on-premises environments to Cloud resources. For optimal results, we suggest utilizing an Identity-Aware Proxy (IAP) tunnel configured with OSlogin. This approach offers several distinct benefits:
 
+## what is Identity-Aware Proxy (IAP) and IAP tunnel
+[https://cloud.google.com/security/products/iap](https://cloud.google.com/security/products/iap)
+[https://docs.cloud.google.com/iap/docs/using-tcp-forwarding](https://docs.cloud.google.com/iap/docs/using-tcp-forwarding)
+
+Identity-Aware Proxy (IAP) is a Google Cloud service that controls access to applications and VMs by verifying user identity and context rather than relying on traditional network firewalls.
+
+The IAP tunnel specifically enables secure TCP forwarding, allowing you to establish SSH or RDP connections to instances that do not have external IP addresses.
+
+By routing traffic through the Google-managed proxy, you eliminate the need for risky "bastion hosts" or exposing port 22 to the open internet.
+
+Ultimately, this architecture ensures that only authorized users with the correct IAM permissions can reach your private resources, significantly reducing your cloud infrastructure's attack surface.
+
+### Benefits
 * Enhanced Security \- Connections are fully encrypted between the local workstation and the VM via an IAP tunnel. Access is governed by Cloud Identity, and OSlogin manages the security keys. No external IP being leveraged.  
 * Operational Efficiency \- OSlogin simplifies SSH key management. After a single initial setup, keys become accessible across all VMs where OSlogin is enabled.  
 * Seamless Cloud Identity Integration \- By leveraging OSlogin, POSIX information remains consistent across the entire VM fleet, removing the need for manual .ssh configurations on individual nodes.
+* Thinlinc Licensing: The Thinlinc server software supports 3 users by default immediately after installation. Its free / community license supports up to 10 concurrent users. 
+[https://www.cendio.com/thinlinc/buy-pricing/free-usage/](https://www.cendio.com/thinlinc/buy-pricing/free-usage/)
 
 Other details: 
 
-* Cloud identity Account and OSlogin \- This is native Google account associated with login. No other authentication authority needed.  
-* In the Cluster Toolkit blueprint yaml, Nvidia Driver, CUDA, VirtualGL, Gnome and Thinlinc Installation are included in the startup script.   
+* Cloud identity Account and OSlogin \- This is native Google account associated with login. No other authentication authority needed.    
 * VM \- We use the latest Google GPU offering. G4-standard-48 w nvidia-rtx-pro-6000-vws card.  
-* VM image \- GCP HPC VM image \- Rocky 8 linux.  
 * ThinLinc \- Remote Visualization Tool common in the HPC industry.
 
 ![image4](images/image4.png)
@@ -51,7 +64,6 @@ a key pair shall be created.
 
    \-rwx------@ 1 \<user id\>  primarygroup   795 Jan 15 15:18 id\_rsa.pub
 
-   
 
    Sample Directory permission: 
 
@@ -65,42 +77,47 @@ a key pair shall be created.
 gcloud compute os-login ssh-keys add --key-file=/home/<user id>/.ssh/id_rsa.pub 
 ```
 
-## Deploy the NVIDIA Isaac Sim Development Workstation (Linux)
+## Setup a NVIDIA Isaac Sum Development Workstation (Linux)
 
-We are going to use Google Cloud Marketplace for deploying the NVIDIA Isaac Sim Development Workstation. All GCP foundation work shall be done prior to use this doc:
+1. Netvigate to the GCP MarketPlace and search for “Nvidia Issac Sim”, Select NVIDIA Isaac Sim Development Workstation (Linux)
 
-- Have VPC network ready
+![alt_text](images/image6.png "image_tooltip")
 
-Deploy NVIDIA Isaac Sim Development Workstation via Google Cloud Marketplace:   
-[Go to Google Cloud Marketplace and search for Isaac Sim Workstation](https://pantheon.corp.google.com/marketplace/product/nvidia/nvidia-isaac-sim-development-workstation-linux)]
+2. Hit the Launch button to launch the system. 
 
-## Setup GCP Marketplace NVIDIA Isaac Sim Workstation: 
+![alt_text](images/image7.png "image_tooltip")
 
-Go to GCP Marketplace: 
-![marketplace](/images/image8.png)
 
-Setup the network:
-![marketplace](/images/image7.png)
+3. Update the fields accordingly. Including the machine name, required GPU(s), storage and VPC etc. Then hit the Deploy button.
 
-Click the deployment: 
-![marketplace](/images/image6.png)
+![alt_text](images/image8.png "image_tooltip")
 
-It takes about 5 mins for the machine to be deployed:  
-\*\* WARNING \*\*: The Cluster Toolkit startup scripts are currently running.
 
-Then do the following steps: 
+![alt_text](images/image9.png "image_tooltip")
 
-1. ssh to the VM  
-2. git clone this repo to the home directory.
-3. chmod 755 to the setup_thinlinc.sh
-4. Execute the setup_thinlinc.sh
 
-This completes the installation of 
+4. The machine is running and ready for SSH. 
+
+![alt_text](images/image10.png "image_tooltip")
+
+## Install Thinlinc on the VM instance
+
+In the SSH window for your VM instance, clone this repository to the home directory and run the setup script provided:
+
+- Git clone this repo to the home directory
+- chmod 755 the file "setup_thinlinc.sh"
+```
+chmod 755 setup_thinlinc.sh
+```
+- Execute the setup_thinlinc.sh script
+```
+./setup_thinlinc.sh
+```
 
 ## Connect to the NVIDIA Isaac Sim workstation VM
 
 1. Setup the IAP tunnel from the On-prem machine: 
-Assume the VM name is : rocky8-thinlinc-g4-gpu-vm-0
+Assume the VM name is : nvidia-2-vm
 ```
 gcloud compute start-iap-tunnel <machine name> 22 --local-host-port=localhost:2222 
 ```
